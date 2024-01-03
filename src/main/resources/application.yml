@@ -1,0 +1,7 @@
+spring:
+  cloud:  
+    gcp:
+      project-id: projectid
+      pubsub:
+        credentials: 
+          location: path
