@@ -4,4 +4,4 @@ spring:
       project-id: m2c-demo
       pubsub:
         credentials: 
-          location: /key.json
+          location: file:/service-key/promo-evaluator.json
