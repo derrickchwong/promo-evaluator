@@ -1,7 +1,7 @@
 spring:
   cloud:  
     gcp:
-      project-id: projectid
+      project-id: m2c-demo
       pubsub:
         credentials: 
-          location: path
+          location: /key.json
