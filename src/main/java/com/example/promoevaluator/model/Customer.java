@@ -9,9 +9,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Document
+@EqualsAndHashCode(exclude={"joinedCampaigns", "availableCampaigns", "orders"})
 public class Customer {
     @Id
     private String id; 
