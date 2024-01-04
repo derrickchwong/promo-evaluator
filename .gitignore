@@ -33,3 +33,4 @@ build/
 .vscode/
 
 promo-evaluator.json
+build_result.json
