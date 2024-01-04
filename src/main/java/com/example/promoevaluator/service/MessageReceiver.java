@@ -5,7 +5,7 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 
 import com.example.promoevaluator.model.Customer;
-import com.example.promoevaluator.model.Order;
+import com.example.promoevaluator.model.event.OrderCreated;
 import com.google.cloud.spring.pubsub.support.BasicAcknowledgeablePubsubMessage;
 import com.google.cloud.spring.pubsub.support.GcpPubSubHeaders;
 
@@ -23,11 +23,18 @@ public class MessageReceiver {
     }
 
     @ServiceActivator(inputChannel = "orderChannel")
-    public void messageReceiver(Order order, @Header(GcpPubSubHeaders.ORIGINAL_MESSAGE) BasicAcknowledgeablePubsubMessage message) {
-        log.info("Message arrived! Payload: " + order);
+    public void messageReceiver(OrderCreated orderCreated, @Header(GcpPubSubHeaders.ORIGINAL_MESSAGE) BasicAcknowledgeablePubsubMessage message) {
+        log.info("Message arrived! Payload: " + orderCreated);
         
-        Customer customer = promoEvaluator.orderReceiver(order);
+        Customer customer = promoEvaluator.orderReceiver(orderCreated);
     
+        message.ack();
+    }
+
+    @ServiceActivator(inputChannel = "errorChannel")
+    public void errorhandler(String payload, @Header(GcpPubSubHeaders.ORIGINAL_MESSAGE) BasicAcknowledgeablePubsubMessage message) {
+        log.info("Message arrived in error handler! Payload: " + payload);
+        
         message.ack();
     }
 }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.promoevaluator.model.Customer;
-import com.example.promoevaluator.model.Order;
 import com.example.promoevaluator.repo.CustomerRepository;
 import com.example.promoevaluator.service.PromoEvaluator;
 

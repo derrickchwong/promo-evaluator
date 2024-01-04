@@ -3,10 +3,10 @@ package com.example.promoevaluator.service;
 import com.example.promoevaluator.model.Campaign;
 import com.example.promoevaluator.model.Customer;
 import com.example.promoevaluator.model.Merchant;
-import com.example.promoevaluator.model.Order;
 import com.example.promoevaluator.model.OrderItem;
 import com.example.promoevaluator.model.Product;
 import com.example.promoevaluator.model.ProductGroup;
+import com.example.promoevaluator.model.event.OrderCreated;
 import com.example.promoevaluator.repo.CustomerRepository;
 import com.example.promoevaluator.repo.OrderRepository;
 import com.example.promoevaluator.repo.ProductGroupRepository;
@@ -48,7 +48,9 @@ public class PromoEvaluatorTest {
         Customer customer = Customer.builder().id("1").build();
         
         // Create an order
-        Order order = Order.builder().customerId(customer.getId()).build();
+        OrderCreated order = new OrderCreated();
+        order.setCustomerId(customer.getId());
+        
 
         ProductGroup pg1 = ProductGroup.builder().id("pg1").build();
         
@@ -76,7 +78,6 @@ public class PromoEvaluatorTest {
         when(customerRepository.findById(customer.getId())).thenReturn(Optional.of(customer));
         when(productGroupRepository.findById(pg1.getId())).thenReturn(Optional.of(pg1));
         when(productRepository.findById(p1.getId())).thenReturn(Optional.of(p1));
-        when(orderRepository.save(order)).thenReturn(order);
         when(customerRepository.save(customer)).thenReturn(customer);
 
 
@@ -98,7 +99,8 @@ public class PromoEvaluatorTest {
         Customer customer = Customer.builder().id("1").build();
 
         // Create an order
-        Order order = Order.builder().customerId(customer.getId()).build();
+        OrderCreated order = new OrderCreated();
+        order.setCustomerId(customer.getId());
         
         ProductGroup pg1 = ProductGroup.builder().id("pg1").build();
         
@@ -130,7 +132,6 @@ public class PromoEvaluatorTest {
         when(customerRepository.findById(customer.getId())).thenReturn(Optional.of(customer));
         when(productGroupRepository.findById(pg1.getId())).thenReturn(Optional.of(pg1));
         when(productRepository.findById(p1.getId())).thenReturn(Optional.of(p1));
-        when(orderRepository.save(order)).thenReturn(order);
         when(customerRepository.save(customer)).thenReturn(customer);
 
         // Evaluate the order

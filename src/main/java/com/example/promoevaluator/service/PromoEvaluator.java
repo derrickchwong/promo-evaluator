@@ -8,6 +8,7 @@ import com.example.promoevaluator.model.Order;
 import com.example.promoevaluator.model.OrderItem;
 import com.example.promoevaluator.model.Product;
 import com.example.promoevaluator.model.ProductGroup;
+import com.example.promoevaluator.model.event.OrderCreated;
 import com.example.promoevaluator.repo.CustomerRepository;
 import com.example.promoevaluator.repo.OrderRepository;
 import com.example.promoevaluator.repo.ProductGroupRepository;
@@ -26,10 +27,16 @@ public class PromoEvaluator {
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
 
-    public Customer orderReceiver(Order order){
+    public Customer orderReceiver(OrderCreated orderCreatedEvent){
             
-        log.info("Order received: {}", order);
+        log.info("OrderCreated received: {}", orderCreatedEvent);
 
+        Order order = Order.builder()
+            .id(orderCreatedEvent.getOrderId())
+            .customerId(orderCreatedEvent.getCustomerId())
+            .orderItems(orderCreatedEvent.getOrderItems())
+            .build();
+        
         orderRepository.save(order);
         Customer customer = customerRepository.findById(order.getCustomerId()).get();
         customer.addOrder(order);

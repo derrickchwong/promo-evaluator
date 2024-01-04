@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.MessageChannel;
 
-import com.example.promoevaluator.model.Order;
+import com.example.promoevaluator.model.event.OrderCreated;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.cloud.spring.pubsub.core.PubSubTemplate;
@@ -21,6 +21,11 @@ public class PubsubConfig {
 
     @Bean
     public MessageChannel orderChannel() {
+        return new DirectChannel();
+    }
+
+    @Bean
+    public MessageChannel errorChannel() {
         return new DirectChannel();
     }
 
@@ -41,13 +46,15 @@ public class PubsubConfig {
     @Bean
     public PubSubInboundChannelAdapter messageChannelAdapter(PubSubMessageConverter pubSubMessageConverter, 
             @Qualifier("orderChannel") MessageChannel inputChannel, 
+            @Qualifier("errorChannel") MessageChannel errorChannel, 
             PubSubTemplate pubSubTemplate) {
 
         pubSubTemplate.setMessageConverter(pubSubMessageConverter);
         PubSubInboundChannelAdapter adapter = new PubSubInboundChannelAdapter(pubSubTemplate, "promo-evaluator");
         adapter.setOutputChannel(inputChannel);
-        adapter.setPayloadType(Order.class);
+        adapter.setPayloadType(OrderCreated.class);
         adapter.setAckMode(AckMode.MANUAL);
+        adapter.setErrorChannel(errorChannel);
         return adapter;
     }
 }
