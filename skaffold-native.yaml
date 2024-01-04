@@ -6,8 +6,12 @@ metadata:
 build:
   artifacts:
   - image: us-central1-docker.pkg.dev/m2c-demo/container/promo-evaluator
-    custom:
-      buildCommand: ./mvnw clean spring-boot:build-image
+    docker:
+      dockerfile: Dockerfile
+      
+    # custom:
+    #   buildCommand: |
+    #     ./mvnw clean spring-boot:build-image -Dmodule.image.name= && docker push $IMAGE
 
 manifests:
   rawYaml:
