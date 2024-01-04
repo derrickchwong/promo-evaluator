@@ -1,0 +1,3 @@
+helm install momo \
+    --set auth.rootPassword=secretpassword,auth.username=promo-evaluator,auth.password=password,auth.database=momo \
+    oci://registry-1.docker.io/bitnamicharts/mongodb

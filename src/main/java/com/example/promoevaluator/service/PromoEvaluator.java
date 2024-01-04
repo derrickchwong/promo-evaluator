@@ -7,21 +7,30 @@ import com.example.promoevaluator.model.Customer;
 import com.example.promoevaluator.model.Order;
 import com.example.promoevaluator.model.OrderItem;
 import com.example.promoevaluator.model.ProductGroup;
+import com.example.promoevaluator.repo.CustomerRepository;
+import com.example.promoevaluator.repo.ProductGroupRepository;
+
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class PromoEvaluator {
+
+    private final CustomerRepository customerRepository;
+    private final ProductGroupRepository productGroupRepository;
 
     public Customer orderReceiver(Order order){
             
         log.info("Order received: {}", order);
 
-        Customer customer = order.getCustomer();
+        Customer customer = customerRepository.findById(order.getCustomerId()).get();
         
         for( OrderItem item : order.getOrderItems() ) {
             
-            ProductGroup productGroup = item.getProduct().getProductGroup();
+            ProductGroup productGroup = productGroupRepository.findById(item.getProduct().getProductGroupId()).get();
+
             if(productGroup.getCampaigns() != null){
                 for( Campaign campaign : productGroup.getCampaigns() ){
 

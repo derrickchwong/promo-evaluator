@@ -2,13 +2,33 @@ apiVersion: skaffold/v4beta8
 kind: Config
 metadata:
   name: promo-evaluator
+# build:
+#   artifacts:
+#     - image: us-central1-docker.pkg.dev/m2c-demo/container/promo-evaluator
+#       docker:
+#         dockerfile: Dockerfile
+#   googleCloudBuild: {}
+
+
 build:
   artifacts:
-    - image: us-central1-docker.pkg.dev/m2c-demo/container/promo-evaluator
-      docker:
-        dockerfile: Dockerfile
-  googleCloudBuild: {}
-    
+  - image: us-central1-docker.pkg.dev/m2c-demo/container/promo-evaluator
+    jib:
+      type: maven
+      args: 
+      - --no-transfer-progress
+      - -Psync
+      - -DskipTests
+      fromImage: eclipse-temurin:21-jre
+    sync:
+      auto: true
+
+portForward:
+- resourceType: service
+  resourceName: promo-evaluator
+  port: 80
+
+
 manifests:
   rawYaml:
     - k8s/deploy.yml

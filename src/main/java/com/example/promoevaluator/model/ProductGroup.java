@@ -1,19 +1,22 @@
 package com.example.promoevaluator.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.jackson.Jacksonized;
 
 @Document
-@Data
-@NoArgsConstructor
-@EqualsAndHashCode(exclude={"merchant", "products", "campaigns"})
+@Builder
+@Jacksonized
+@Getter
+@Setter
 public class ProductGroup {
     
     @Id
@@ -21,13 +24,19 @@ public class ProductGroup {
     private String name;
     private String description;
     @DocumentReference
-    private Merchant merchant;
-
-    @DocumentReference
     private List<Product> products;
-
-    // having a list of related campaigns here can save compute time 
     @DocumentReference
     private List<Campaign> campaigns;
-    
+
+    public void addProduct(Product product) {
+        if(products == null)
+            products = new ArrayList<>();
+        products.add(product);
+    }
+
+    public void addCampaign(Campaign campaign) {
+        if(campaigns == null)
+            campaigns = new ArrayList<>();
+        campaigns.add(campaign);
+    }
 }

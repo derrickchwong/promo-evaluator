@@ -1,36 +1,35 @@
 package com.example.promoevaluator.model;
 
 import java.time.Instant;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
-
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.jackson.Jacksonized;
 
 @Document
+@Builder
+@Jacksonized
+@Getter
+@Setter
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(exclude = {"participants", "productGroupAmountMap", "merchant"})
 public class Campaign {
-    @Id
+
     private String id;   
-    @DocumentReference
-    private Merchant merchant;
+    private String merchantId;
     private Instant startDate;    
     private Instant endDate;    
     private Integer quota;
     private Integer remaining;
-
-    @DocumentReference
-    private Map<ProductGroup, Integer> productGroupAmountMap;
+    private Map<String, Integer> productGroupAmountMap;
+    public void addProductGroupAmount(String productGroup, Integer amount) {
+        if(productGroupAmountMap == null)
+            productGroupAmountMap = new HashMap<>();
+        productGroupAmountMap.put(productGroup, amount);
+    }
     
-    @DocumentReference(lazy = true)
-    private List<Customer> participants;
 }

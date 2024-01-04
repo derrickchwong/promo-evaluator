@@ -6,14 +6,20 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.jackson.Jacksonized;
 
 @Document
-@Data
+@Builder
+@Jacksonized
+@Getter
+@Setter
 public class Order {
     @Id
     private String id;
-    private Customer customer;
+    private String customerId;
     private List<OrderItem> orderItems;
 
     public void addOrderItem(OrderItem orderItem){

@@ -8,26 +8,26 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.jackson.Jacksonized;
 
-@Data
 @Document
-@EqualsAndHashCode(exclude={"joinedCampaigns", "availableCampaigns", "orders"})
+@Builder
+@Jacksonized
+@Getter
+@Setter
 public class Customer {
     @Id
     private String id; 
     private String name;
 
     // list of available campaigns for the customer to join, key is campaign and value is the remaining amount 
-    @DocumentReference(lazy = true)
     private Map<Campaign, Integer> availableCampaigns;
 
     @DocumentReference(lazy = true)
     private List<Order> orders;
-
-    @DocumentReference(lazy = true)
-    private List<Campaign> joinedCampaigns;
 
     public void updateAvailableCampaign(Campaign campaign, int amount) {
         if(availableCampaigns == null)
