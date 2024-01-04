@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.MessageChannel;
 
+import com.example.promoevaluator.model.event.OrderCancelled;
 import com.example.promoevaluator.model.event.OrderCreated;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -21,6 +22,11 @@ public class PubsubConfig {
 
     @Bean
     public MessageChannel orderChannel() {
+        return new DirectChannel();
+    }
+
+    @Bean
+    public MessageChannel orderCancelledChannel() {
         return new DirectChannel();
     }
 
@@ -53,6 +59,21 @@ public class PubsubConfig {
         PubSubInboundChannelAdapter adapter = new PubSubInboundChannelAdapter(pubSubTemplate, "promo-evaluator");
         adapter.setOutputChannel(inputChannel);
         adapter.setPayloadType(OrderCreated.class);
+        adapter.setAckMode(AckMode.MANUAL);
+        adapter.setErrorChannel(errorChannel);
+        return adapter;
+    }
+
+    @Bean
+    public PubSubInboundChannelAdapter orderCancelledChannelAdapter(PubSubMessageConverter pubSubMessageConverter, 
+            @Qualifier("orderCancelledChannel") MessageChannel orderCancelledChannel, 
+            @Qualifier("errorChannel") MessageChannel errorChannel, 
+            PubSubTemplate pubSubTemplate) {
+
+        pubSubTemplate.setMessageConverter(pubSubMessageConverter);
+        PubSubInboundChannelAdapter adapter = new PubSubInboundChannelAdapter(pubSubTemplate, "promo-evaluator-order-cancelled");
+        adapter.setOutputChannel(orderCancelledChannel);
+        adapter.setPayloadType(OrderCancelled.class);
         adapter.setAckMode(AckMode.MANUAL);
         adapter.setErrorChannel(errorChannel);
         return adapter;

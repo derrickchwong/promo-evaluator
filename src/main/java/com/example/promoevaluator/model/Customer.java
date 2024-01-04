@@ -36,6 +36,11 @@ public class Customer {
         else
             orders.add(order);
     }
+    
+    public void cancelOrder(Order order){
+        if(orders != null)
+            orders.remove(order);
+    }
 
     // update the available campaigns for the customer)
     public void updateAvailableCampaign(Campaign campaign, int amount) {

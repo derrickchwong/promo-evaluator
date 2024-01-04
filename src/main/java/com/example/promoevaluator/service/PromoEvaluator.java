@@ -8,6 +8,7 @@ import com.example.promoevaluator.model.Order;
 import com.example.promoevaluator.model.OrderItem;
 import com.example.promoevaluator.model.Product;
 import com.example.promoevaluator.model.ProductGroup;
+import com.example.promoevaluator.model.event.OrderCancelled;
 import com.example.promoevaluator.model.event.OrderCreated;
 import com.example.promoevaluator.repo.CustomerRepository;
 import com.example.promoevaluator.repo.OrderRepository;
@@ -26,6 +27,32 @@ public class PromoEvaluator {
     private final ProductGroupRepository productGroupRepository;
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
+
+    public Customer orderCancelled(OrderCancelled orderCancelledEvent){
+        log.info("OrderCancelled received: {}", orderCancelledEvent);
+
+        Order order = orderRepository.findById(orderCancelledEvent.getOrderId()).get();
+        Customer customer = customerRepository.findById(order.getCustomerId()).get();
+        customer.cancelOrder(order);
+
+        for( OrderItem item : order.getOrderItems() ) {
+            
+            Product product = productRepository.findById(item.getProductId()).get();
+            ProductGroup productGroup = productGroupRepository.findById(product.getProductGroupId()).get();
+
+            if(productGroup.getCampaigns() != null){
+                for( Campaign campaign : productGroup.getCampaigns() ){
+    
+                    Integer existingRemain = customer.getAvailableCampaigns().get(campaign.getId());
+                    customer.updateAvailableCampaign(campaign, existingRemain + item.getPrice());
+                
+                }
+            }
+        }
+        customerRepository.save(customer);
+        return customer;
+    }
+
 
     public Customer orderReceiver(OrderCreated orderCreatedEvent){
             

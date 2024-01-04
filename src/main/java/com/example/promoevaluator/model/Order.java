@@ -28,4 +28,10 @@ public class Order {
             orderItems = new ArrayList<>();
         orderItems.add(orderItem);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Order o = (Order) obj;
+        return o.id.equals(this.id) && o.customerId.equals(this.customerId);    
+    }
 }
