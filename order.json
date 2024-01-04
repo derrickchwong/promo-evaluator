@@ -1,0 +1,11 @@
+{
+  "id": "order001",
+  "customerId": "dc25ece0-1975-4e5d-af5b-38d2cb2e2d1c",
+  "orderItems": [
+    {
+      "quantity": 1,
+      "productId": "60dbbc2a-78da-4fde-ae3e-5e5c0fa3d8cd",
+      "price": 1000
+    }
+  ]
+}
