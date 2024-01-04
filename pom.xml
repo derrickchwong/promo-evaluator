@@ -14,7 +14,7 @@
 	<name>promo-evaluator</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 		<spring-cloud-gcp.version>5.0.0</spring-cloud-gcp.version>
     	<spring-cloud.version>2023.0.0</spring-cloud.version>
 		<jib.maven-plugin-version>3.4.0</jib.maven-plugin-version>
@@ -80,7 +80,7 @@
 				<version>${jib.maven-plugin-version}</version>
 				<configuration>
 				<from>
-					<image>eclipse-temurin:21-jre</image>
+					<image>eclipse-temurin:17-jre</image>
 				</from>
 				<container>
 					<jvmFlags>
@@ -93,6 +93,21 @@
 			<plugin>
 				<groupId>org.graalvm.buildtools</groupId>
 				<artifactId>native-maven-plugin</artifactId>
+				<configuration>
+					<classesDirectory>${project.build.outputDirectory}</classesDirectory>
+					<metadataRepository>
+						<enabled>true</enabled>
+					</metadataRepository>
+					<requiredVersion>22.3</requiredVersion>
+				</configuration>
+				<executions>
+					<execution>
+						<id>add-reachability-metadata</id>
+						<goals>
+							<goal>add-reachability-metadata</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -104,6 +119,22 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<image>
+						<name>us-central1-docker.pkg.dev/m2c-demo/container/promo-evaluator</name>
+						<builder>paketobuildpacks/builder:tiny</builder>
+						<env>
+							<BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
+							<BP_JVM_VERSION>17.*</BP_JVM_VERSION>
+						</env>
+					</image>
+					<executions>
+						<execution>
+							<id>process-aot</id>
+							<goals>
+								<goal>process-aot</goal>
+							</goals>
+						</execution>
+					</executions>
 				</configuration>
 			</plugin>
 		</plugins>

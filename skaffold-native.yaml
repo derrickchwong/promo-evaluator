@@ -1,0 +1,14 @@
+apiVersion: skaffold/v4beta8
+kind: Config
+metadata:
+  name: promo-evaluator
+
+build:
+  artifacts:
+  - image: us-central1-docker.pkg.dev/m2c-demo/container/promo-evaluator
+    custom:
+      buildCommand: ./mvnw clean spring-boot:build-image
+
+manifests:
+  rawYaml:
+    - k8s/deploy.yml
