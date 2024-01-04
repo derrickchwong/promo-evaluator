@@ -45,10 +45,10 @@ public class CustomerController {
         return customerRepository.save(customer);
     }
 
-    @PostMapping("/orders")
-    public Customer addOrder(@RequestBody Order order) {
-        return promoEvaluator.orderReceiver(order);
-    }
+    // @PostMapping("/orders")
+    // public Customer addOrder(@RequestBody Order order) {
+    //     return promoEvaluator.orderReceiver(order);
+    // }
 
 
 }
