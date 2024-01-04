@@ -13,7 +13,6 @@ import lombok.extern.jackson.Jacksonized;
 @Setter
 public class OrderItem {
     private Integer quantity;
-    @DocumentReference
-    private Product product;
+    private String productId;
     private Integer price;
 }

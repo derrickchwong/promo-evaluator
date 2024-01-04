@@ -24,23 +24,23 @@ public class PromoEvaluatorTest {
     //     Customer customer = Customer.builder().id("1").build();
         
     //     // Create an order
-    //     Order order = Order.builder().customer(customer).build();
+    //     Order order = Order.builder().customerId(customer.getId()).build();
 
     //     ProductGroup pg1 = ProductGroup.builder().id("pg1").build();
         
-    //     Product p1 = Product.builder().id("p1").productGroup(pg1).build();
+    //     Product p1 = Product.builder().id("p1").productGroupId(pg1.getId()).build();
 
     //     pg1.setProducts(List.of(p1));
 
     //     Merchant merchant1 = Merchant.builder().id("merchant1").build();
         
-    //     Campaign campaign1 = Campaign.builder().id("campaign1").merchant(merchant1).build();
+    //     Campaign campaign1 = Campaign.builder().id("campaign1").merchantId(merchant1.getId()).build();
         
     //     // pg1.setCampaigns(List.of(campaign1));
-    //     campaign1.setProductGroupAmountMap(Map.of(pg1, 100));
+    //     campaign1.setProductGroupAmountMap(Map.of(pg1.getId(), 100));
 
     //     // Create an order item
-    //     OrderItem item1 = OrderItem.builder().product(p1).price(10).build();
+    //     OrderItem item1 = OrderItem.builder().productId(p1.getId()).price(10).build();
 
     //     // Add the order item to the order
     //     order.addOrderItem(item1);

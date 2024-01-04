@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.promoevaluator.model.Campaign;
@@ -77,14 +78,19 @@ public class MerchantController {
         merchantRepository.save(merchant);
         campaignRepository.save(campaign);
         
-        if(campaign.getProductGroupAmountMap() != null)    
-            for(String pgId : campaign.getProductGroupAmountMap().keySet()){
-                ProductGroup pg = productGroupRepository.findById(pgId).get();
-                pg.addCampaign(campaign);
-                productGroupRepository.save(pg);
-            }
-        
         return ResponseEntity.ok(campaign);
+    }
+
+    @PostMapping("/merchants/{merchantId}/campaigns/{campaignId}/product-groups")
+    public ResponseEntity addProductGroupToCampaign(@PathVariable String merchantId, @PathVariable String campaignId, @RequestParam String productGroupId, @RequestParam int amount){
+        log.info("Adding product group {} to campaign {} for merchant {}", productGroupId, campaignId, merchantId);
+        Campaign campaign = campaignRepository.findById(campaignId).get();
+        campaign.addProductGroupAmount(productGroupId, amount);
+        ProductGroup productGroup = productGroupRepository.findById(productGroupId).get();
+        productGroup.addCampaign(campaign);
+        campaignRepository.save(campaign);
+        productGroupRepository.save(productGroup);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/merchants/{merchantId}/product-groups")
@@ -103,11 +109,22 @@ public class MerchantController {
     public ResponseEntity<Product> addProduct(@PathVariable String productGroupId, @RequestBody Product product){
         if(product.getId() == null)
             product.setId(UUID.randomUUID().toString());
+        product.setProductGroupId(productGroupId);
         ProductGroup productGroup = productGroupRepository.findById(productGroupId).get();
         productGroup.addProduct(product);
         productGroupRepository.save(productGroup);
         productRepository.save(product);
         return ResponseEntity.ok(product);
+    }
+
+    @DeleteMapping("/product-groups/{productGroupId}/products/{productId}")
+    public ResponseEntity deleteProduct(@PathVariable String productGroupId, @PathVariable String productId){
+        ProductGroup productGroup = productGroupRepository.findById(productGroupId).get();
+        Product product = productRepository.findById(productId).get();
+        productGroup.deleteProduct(product);
+        productGroupRepository.save(productGroup);
+        productRepository.delete(product);
+        return ResponseEntity.ok().build();
     }
 
 

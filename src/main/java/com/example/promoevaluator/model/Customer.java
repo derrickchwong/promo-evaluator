@@ -1,5 +1,6 @@
 package com.example.promoevaluator.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,14 +25,22 @@ public class Customer {
     private String name;
 
     // list of available campaigns for the customer to join, key is campaign and value is the remaining amount 
-    private Map<Campaign, Integer> availableCampaigns;
+    private Map<String, Integer> availableCampaigns;
 
     @DocumentReference(lazy = true)
     private List<Order> orders;
 
+    public void addOrder(Order order) {
+        if(orders == null)
+            orders = new ArrayList<>();
+        else
+            orders.add(order);
+    }
+
+    // update the available campaigns for the customer)
     public void updateAvailableCampaign(Campaign campaign, int amount) {
         if(availableCampaigns == null)
             availableCampaigns = new HashMap<>();    
-        availableCampaigns.put(campaign, amount);
+        availableCampaigns.put(campaign.getId(), amount);
     }
 }

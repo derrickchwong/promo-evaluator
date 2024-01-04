@@ -34,6 +34,11 @@ public class ProductGroup {
         products.add(product);
     }
 
+    public void deleteProduct(Product product) {
+        if(products != null)
+            products.remove(product);
+    }
+
     public void addCampaign(Campaign campaign) {
         if(campaigns == null)
             campaigns = new ArrayList<>();
