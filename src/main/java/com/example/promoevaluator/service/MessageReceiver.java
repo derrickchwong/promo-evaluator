@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.promoevaluator.model.Customer;
 import com.example.promoevaluator.model.event.OrderCancelled;
 import com.example.promoevaluator.model.event.OrderCreated;
+import com.example.promoevaluator.model.event.OrderEvent;
 import com.google.cloud.spring.pubsub.support.BasicAcknowledgeablePubsubMessage;
 import com.google.cloud.spring.pubsub.support.GcpPubSubHeaders;
 
@@ -24,20 +25,17 @@ public class MessageReceiver {
     }
 
     @ServiceActivator(inputChannel = "orderChannel")
-    public void messageReceiver(OrderCreated orderCreated, @Header(GcpPubSubHeaders.ORIGINAL_MESSAGE) BasicAcknowledgeablePubsubMessage message) {
-        log.info("Message arrived! Payload: " + orderCreated);
+    public void messageReceiver(OrderEvent orderEvent, @Header(GcpPubSubHeaders.ORIGINAL_MESSAGE) BasicAcknowledgeablePubsubMessage message) {
+        log.info("Message arrived! Payload: " + orderEvent);
+       
+        if(orderEvent instanceof OrderCreated){
+            OrderCreated orderCreated = (OrderCreated) orderEvent;
+            Customer customer = promoEvaluator.orderReceiver(orderCreated);
+        }else if(orderEvent instanceof OrderCancelled){
+            OrderCancelled orderCancelled = (OrderCancelled) orderEvent;
+            Customer customer = promoEvaluator.orderCancelled(orderCancelled);
+        }
         
-        Customer customer = promoEvaluator.orderReceiver(orderCreated);
-    
-        message.ack();
-    }
-
-    @ServiceActivator(inputChannel = "orderCancelledChannel")
-    public void orderCancelledReceiver(OrderCancelled orderCancelled, @Header(GcpPubSubHeaders.ORIGINAL_MESSAGE) BasicAcknowledgeablePubsubMessage message) {
-        log.info("Order cancelled message arrived! Payload: " + orderCancelled);
-        
-        Customer customer = promoEvaluator.orderCancelled(orderCancelled);
-    
         message.ack();
     }
 

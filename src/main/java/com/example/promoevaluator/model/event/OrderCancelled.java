@@ -5,9 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class OrderCancelled {
+public class OrderCancelled extends OrderEvent{
     
-    private String eventId;
-    private String orderId;
     
 }

@@ -10,10 +10,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class OrderCreated {
+public class OrderCreated extends OrderEvent{
     
-    private String eventId;
-    private String orderId;
     private String customerId;
     private List<OrderItem> orderItems;
 
