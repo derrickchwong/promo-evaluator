@@ -10,6 +10,7 @@ import com.example.promoevaluator.model.Product;
 import com.example.promoevaluator.model.ProductGroup;
 import com.example.promoevaluator.model.event.OrderCancelled;
 import com.example.promoevaluator.model.event.OrderCreated;
+import com.example.promoevaluator.model.event.OrderItemQuantityUpdated;
 import com.example.promoevaluator.repo.CustomerRepository;
 import com.example.promoevaluator.repo.OrderRepository;
 import com.example.promoevaluator.repo.ProductGroupRepository;
@@ -94,4 +95,40 @@ public class PromoEvaluator {
         return customer;
 
     }
+    
+    public Customer orderItemQuantityUpdated(OrderItemQuantityUpdated orderItemQuantityUpdatedEvent) {
+        log.info("OrderItemQuantityUpdated received: {}", orderItemQuantityUpdatedEvent);
+    
+        Order order = orderRepository.findById(orderItemQuantityUpdatedEvent.getOrderId()).get();
+        OrderItem orderItem = order.getOrderItems().stream().filter(item -> item.getProductId().equals(orderItemQuantityUpdatedEvent.getProductId())).findFirst().get();
+        
+        Customer customer = customerRepository.findById(order.getCustomerId()).get();
+    
+        // Get the product and product group for the updated order item.
+        Product product = productRepository.findById(orderItemQuantityUpdatedEvent.getProductId()).get();
+        ProductGroup productGroup = productGroupRepository.findById(product.getProductGroupId()).get();
+    
+        // Update the customer's available campaigns based on the updated order item quantity.
+        if (productGroup.getCampaigns() != null) {
+            for (Campaign campaign : productGroup.getCampaigns()) {
+                // Get the existing available campaign amount for the customer.
+                Integer existingRemain = customer.getAvailableCampaigns().get(campaign.getId());
+    
+                // Update the available campaign amount based on the updated order item quantity.
+                if (orderItemQuantityUpdatedEvent.getNewQuantity() > orderItemQuantityUpdatedEvent.getPreviousQuantity()) {
+                    // The order item quantity has increased.
+                    customer.updateAvailableCampaign(campaign, existingRemain - (orderItemQuantityUpdatedEvent.getNewQuantity() - orderItemQuantityUpdatedEvent.getPreviousQuantity()) * orderItem.getPrice());
+                } else {
+                    // The order item quantity has decreased.
+                    customer.updateAvailableCampaign(campaign, existingRemain + (orderItemQuantityUpdatedEvent.getPreviousQuantity() - orderItemQuantityUpdatedEvent.getNewQuantity()) * orderItem.getPrice());
+                }
+            }
+        }
+    
+        // Save the updated customer.
+        customerRepository.save(customer);
+    
+        return customer;
+    }
+    
 }

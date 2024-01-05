@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type", visible = true)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = OrderCreated.class, name = "ORDER_CREATED"),
-    @JsonSubTypes.Type(value = OrderCancelled.class, name = "ORDER_CANCELLED")
+    @JsonSubTypes.Type(value = OrderCancelled.class, name = "ORDER_CANCELLED"),
+    @JsonSubTypes.Type(value = OrderItemQuantityUpdated.class, name = "ORDER_ITEM_QUANTITY_UPDATED")
 })
 @Data
 @NoArgsConstructor

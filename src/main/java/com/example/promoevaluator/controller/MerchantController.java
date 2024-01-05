@@ -1,5 +1,6 @@
 package com.example.promoevaluator.controller;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -70,10 +71,12 @@ public class MerchantController {
         if(campaign.getId() == null) 
             campaign.setId(UUID.randomUUID().toString());
         
-        Merchant merchant = merchantRepository.findById(merchantId).get();
+        Optional<Merchant> merchant = merchantRepository.findById(merchantId);
+        if(merchant.isEmpty())
+            return ResponseEntity.notFound().build();
         campaign.setMerchantId(merchantId);
-        merchant.addCampaign(campaign);
-        merchantRepository.save(merchant);
+        merchant.get().addCampaign(campaign);
+        merchantRepository.save(merchant.get());
         campaignRepository.save(campaign);
         
         return ResponseEntity.ok(campaign);

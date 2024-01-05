@@ -8,6 +8,7 @@ import com.example.promoevaluator.model.Customer;
 import com.example.promoevaluator.model.event.OrderCancelled;
 import com.example.promoevaluator.model.event.OrderCreated;
 import com.example.promoevaluator.model.event.OrderEvent;
+import com.example.promoevaluator.model.event.OrderItemQuantityUpdated;
 import com.google.cloud.spring.pubsub.support.BasicAcknowledgeablePubsubMessage;
 import com.google.cloud.spring.pubsub.support.GcpPubSubHeaders;
 
@@ -34,6 +35,9 @@ public class MessageReceiver {
         }else if(orderEvent instanceof OrderCancelled){
             OrderCancelled orderCancelled = (OrderCancelled) orderEvent;
             Customer customer = promoEvaluator.orderCancelled(orderCancelled);
+        }else if (orderEvent instanceof OrderItemQuantityUpdated){
+            OrderItemQuantityUpdated orderItemQuantityUpdated = (OrderItemQuantityUpdated) orderEvent;
+            Customer customer = promoEvaluator.orderItemQuantityUpdated(orderItemQuantityUpdated);
         }
         
         message.ack();
