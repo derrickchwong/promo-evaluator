@@ -6,10 +6,8 @@ import java.util.List;
 import com.example.promoevaluator.model.OrderItem;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 public class OrderCreated extends OrderEvent{
     
     private String customerId;
@@ -19,5 +17,9 @@ public class OrderCreated extends OrderEvent{
         if(orderItems == null)
             orderItems = new ArrayList<>();
         orderItems.add(orderItem);
+    }
+
+    public OrderCreated() {
+        super();
     }
 }

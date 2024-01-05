@@ -1,4 +1,5 @@
 {
+  "type": "ORDER_CREATED",
   "eventId": "event007",
   "orderId": "order007",
   "customerId": "dc25ece0-1975-4e5d-af5b-38d2cb2e2d1c",
@@ -9,4 +10,10 @@
       "price": 100
     }
   ]
+}
+
+{
+  "type": "ORDER_CANCELLED",
+  "eventId": "event006",
+  "orderId": "order006"
 }
