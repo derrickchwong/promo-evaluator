@@ -4,7 +4,9 @@ This repo demostrates use of events-driven architecture with GCP Pub/Sub - as th
 
 This project subscript to one topic and expect to receive `OrderCreated` and `OrderCancelled` events. It then processes them to determine if any campaign is applicable and calculate the remaining amount to join the campaign.  
 
-### Build and Deploy
+One of the benefits of using this approach is that the campaign calculation is decoupled from user queries, which means it can is done when there is change on order - order created or cancelled. (Should also add item added/removed quantity updated events in the future). The amounts for available campaigns are ready and always up-to-date when user query them. User experience is improved as well. 
+
+### Build and Deploy locally
 
 GraalVM Native Image is great for startup time and memory usage. However the image building time can take over 10 mins, which is not ideal during development.
 
@@ -52,5 +54,7 @@ To deploy to test or production, you can use below command for container image b
 ```
 skaffold -f skaffold-native.yaml run
 ```
+
+### Build using Cloud Build
 
 A `cloudbuild.yaml` file is also provided for using Cloud Build to build and deploy the container image to Artifact Registry.
