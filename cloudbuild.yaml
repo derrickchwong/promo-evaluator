@@ -1,5 +1,5 @@
 steps:
-- name: 'eclipse-temurin:17-jdk'
+- name: 'ghcr.io/graalvm/jdk-community:17'
   args: ['./mvnw', 'package', '-Pnative']
 - name: 'gcr.io/cloud-builders/skaffold'
   args: ['build', '-f', 'skaffold-native.yaml']
