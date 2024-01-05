@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.promoevaluator.model.Campaign;
-import com.example.promoevaluator.model.Customer;
 import com.example.promoevaluator.model.Merchant;
-import com.example.promoevaluator.model.Order;
 import com.example.promoevaluator.model.Product;
 import com.example.promoevaluator.model.ProductGroup;
 import com.example.promoevaluator.repo.CampaignRepository;

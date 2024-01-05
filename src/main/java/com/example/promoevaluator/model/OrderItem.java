@@ -1,7 +1,5 @@
 package com.example.promoevaluator.model;
 
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
