@@ -1,6 +1,6 @@
 steps:
-- name: 'maven:3.9-eclipse-temurin-17'
-  args: ['mvn', 'package', '-Pnative']
+- name: 'eclipse-temurin:17-jre'
+  args: ['./mvnw', 'package', '-Pnative']
 - name: 'gcr.io/cloud-builders/skaffold'
   args: ['build', '-f', 'skaffold-native.yaml']
 images:
