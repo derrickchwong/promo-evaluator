@@ -1,3 +1,5 @@
+This repo demostrates use of events-driven architecture with GCP pub/sub. 
+
 To avoid continously building / deploying container while developing, use `skaffold dev` instead.
 
 ```
@@ -9,7 +11,7 @@ This will sync files from local workstation to K8s automatically, so you do not 
 To build and deploy Spring Boot Native image, use the `native` profile defined on `pom.xml`.
 
 ```
-./mvnw clean package -Dnative
+./mvnw clean package -Pnative
 ```
 
 To build container image and deploy to k8s, simply run: 
