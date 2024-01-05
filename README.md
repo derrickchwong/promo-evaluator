@@ -52,3 +52,5 @@ To deploy to test or production, you can use below command for container image b
 ```
 skaffold -f skaffold-native.yaml run
 ```
+
+A `cloudbuild.yaml` file is also provided for using Cloud Build to build and deploy the container image to Artifact Registry.
