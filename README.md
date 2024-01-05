@@ -49,7 +49,7 @@ drwxr-xr-x  2 user user      4096 Jan  5 02:44 test-ids
 You can run it locally with `./promo-evaluator`. 
 
 
-To deploy to test or production, you can use below command for container image building and deployment:
+To deploy the native image to GKE, you can use below command for container image building and deployment:
 
 ```
 skaffold -f skaffold-native.yaml run
