@@ -1,0 +1,7 @@
+steps:
+- name: 'maven:3.6.3-jdk-11'
+  args: ['mvn', 'package', '-Pnative']
+- name: 'gcr.io/cloud-builders/skaffold'
+  args: ['build', '-f', 'skaffold-native.yaml']
+images:
+- 'us-central1-docker.pkg.dev/m2c-demo/container/promo-evaluator'
