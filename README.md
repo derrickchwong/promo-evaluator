@@ -1,6 +1,6 @@
 ### Intro
 
-This repo demostrates use of events-driven architecture with GCP Pub/Sub, as the event broker, MongoDb, Spring Boot, Graalvm, and Kubernetes. 
+This repo demostrates use of events-driven architecture with GCP Pub/Sub - as the event broker, MongoDb, Spring Boot, Graalvm, and Kubernetes. 
 
 This project subscript to one topic and expect to receive `OrderCreated` and `OrderCancelled` events. It then processes them to determine if any campaign is applicable and calculate the remaining amount to join the campaign.  
 
@@ -8,7 +8,7 @@ This project subscript to one topic and expect to receive `OrderCreated` and `Or
 
 GraalVM Native Image is great for startup time and memory usage. However the image building time can take over 10 mins, which is not ideal during development.
 
-To avoid continously building / deploying container while developing, use `skaffold dev` instead.
+To avoid continously building / deploying container while developing, use `skaffold dev` instead. This will use `jib` for container image building, which is much quicker and convinient. 
 
 ```
 skaffold -f skaffold-dev.yaml dev
