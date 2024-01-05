@@ -1,10 +1,10 @@
 ### Intro
 
-This repo demostrates use of events-driven architecture with GCP Pub/Sub - as the event broker, MongoDb, Spring Boot, Graalvm, and Kubernetes. 
+This repo demostrates use of events-driven architecture with `GCP Pub/Sub` - as the event broker, `MongoDb`, `Spring Boot`, `Graalvm`, and `GKE`. 
 
-This project subscript to one topic and expect to receive `OrderCreated` and `OrderCancelled` events. It then processes them to determine if any campaign is applicable and calculate the remaining amount to join the campaign.  
+This project subscript to one topic and expect to receive `OrderCreated`, `OrderCancelled` and `OrderItemQuantityUpdated` events. It then processes them to determine if any campaign is applicable and calculate the remaining amount for joining the campaign.  
 
-One of the benefits of using this approach is that the campaign calculation is decoupled from user queries, which means it can is done when there is change on order - order created or cancelled. (Should also add item added/removed quantity updated events in the future). The amounts for available campaigns are ready and always up-to-date when user query them. User experience is improved as well. 
+One of the benefits of using this approach is that the campaign calculation is decoupled from user queries, which means it can be done when there is update on order - order created, cancelled or item quantity updated. The amounts for available campaigns are ready and always up-to-date when user query them. 
 
 ### Build and Deploy locally
 
@@ -58,3 +58,9 @@ skaffold -f skaffold-native.yaml run
 ### Build using Cloud Build
 
 A `cloudbuild.yaml` file is also provided for using Cloud Build to build and deploy the container image to Artifact Registry.
+
+Submit the build with this command:
+
+```
+gcloud builds submit
+```
