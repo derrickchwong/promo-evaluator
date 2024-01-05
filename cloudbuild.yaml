@@ -1,5 +1,5 @@
 steps:
-- name: 'ghcr.io/graalvm/jdk-community:17'
+- name: 'ghcr.io/graalvm/graalvm-ce:ol7-java17'
   args: ['./mvnw', 'package', '-Pnative']
 - name: 'gcr.io/cloud-builders/skaffold'
   args: ['build', '-f', 'skaffold-native.yaml']
