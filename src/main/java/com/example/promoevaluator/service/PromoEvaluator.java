@@ -36,20 +36,18 @@ public class PromoEvaluator {
         Customer customer = customerRepository.findById(order.getCustomerId()).get();
         customer.cancelOrder(order);
 
-        for( OrderItem item : order.getOrderItems() ) {
-            
+        order.getOrderItems().parallelStream().forEach(item -> {
             Product product = productRepository.findById(item.getProductId()).get();
             ProductGroup productGroup = productGroupRepository.findById(product.getProductGroupId()).get();
 
             if(productGroup.getCampaigns() != null){
-                for( Campaign campaign : productGroup.getCampaigns() ){
-    
+                productGroup.getCampaigns().parallelStream().forEach(campaign -> {
                     Integer existingRemain = customer.getAvailableCampaigns().get(campaign.getId());
                     customer.updateAvailableCampaign(campaign, existingRemain + item.getPrice());
-                
-                }
+                });
             }
-        }
+        });
+
         customerRepository.save(customer);
         return customer;
     }
@@ -68,29 +66,25 @@ public class PromoEvaluator {
         orderRepository.save(order);
         Customer customer = customerRepository.findById(order.getCustomerId()).get();
         customer.addOrder(order);
-        
 
-        for( OrderItem item : order.getOrderItems() ) {
-            
+        order.getOrderItems().parallelStream().forEach(item -> {
             Product product = productRepository.findById(item.getProductId()).get();
             ProductGroup productGroup = productGroupRepository.findById(product.getProductGroupId()).get();
 
-            if(productGroup.getCampaigns() != null){
-                for( Campaign campaign : productGroup.getCampaigns() ){
-
-                    // update available campaign
-                    if(customer.getAvailableCampaigns() != null && customer.getAvailableCampaigns().containsKey(campaign.getId())){
-                        // existing available campaign
-                        Integer existingRemain = customer.getAvailableCampaigns().get(campaign.getId());
-                        customer.updateAvailableCampaign(campaign, existingRemain - item.getPrice());
-                    }else{
-                        // new available campaign
-                        customer.updateAvailableCampaign(campaign, campaign.getProductGroupAmountMap().get(productGroup.getId()) - item.getPrice());
-                    }
-                    
-                }
-            }
-        }
+            if(productGroup.getCampaigns() != null)
+                productGroup.getCampaigns().parallelStream().forEach(
+                    campaign -> {
+                        if(customer.getAvailableCampaigns() != null && customer.getAvailableCampaigns().containsKey(campaign.getId())){
+                            // existing available campaign
+                            Integer existingRemain = customer.getAvailableCampaigns().get(campaign.getId());
+                            customer.updateAvailableCampaign(campaign, existingRemain - item.getPrice());
+                        }else{
+                            // new available campaign
+                            customer.updateAvailableCampaign(campaign, campaign.getProductGroupAmountMap().get(productGroup.getId()) - item.getPrice());
+                        }
+                    });
+        });
+            
         customerRepository.save(customer);
         return customer;
 
@@ -100,7 +94,8 @@ public class PromoEvaluator {
         log.info("OrderItemQuantityUpdated received: {}", orderItemQuantityUpdatedEvent);
     
         Order order = orderRepository.findById(orderItemQuantityUpdatedEvent.getOrderId()).get();
-        OrderItem orderItem = order.getOrderItems().stream().filter(item -> item.getProductId().equals(orderItemQuantityUpdatedEvent.getProductId())).findFirst().get();
+        OrderItem orderItem = order.getOrderItems()
+            .parallelStream().filter(item -> item.getProductId().equals(orderItemQuantityUpdatedEvent.getProductId())).findFirst().get();
         
         Customer customer = customerRepository.findById(order.getCustomerId()).get();
     
@@ -110,7 +105,7 @@ public class PromoEvaluator {
     
         // Update the customer's available campaigns based on the updated order item quantity.
         if (productGroup.getCampaigns() != null) {
-            for (Campaign campaign : productGroup.getCampaigns()) {
+            productGroup.getCampaigns().parallelStream().forEach(campaign -> {
                 // Get the existing available campaign amount for the customer.
                 Integer existingRemain = customer.getAvailableCampaigns().get(campaign.getId());
     
@@ -122,7 +117,7 @@ public class PromoEvaluator {
                     // The order item quantity has decreased.
                     customer.updateAvailableCampaign(campaign, existingRemain + (orderItemQuantityUpdatedEvent.getPreviousQuantity() - orderItemQuantityUpdatedEvent.getNewQuantity()) * orderItem.getPrice());
                 }
-            }
+            });
         }
     
         // Save the updated customer.
