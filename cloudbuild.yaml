@@ -3,5 +3,3 @@ steps:
   args: ['./mvnw', 'package', '-Pnative']
 - name: 'gcr.io/k8s-skaffold/skaffold:v2.9.0'
   args: ['skaffold', 'build', '-f', 'skaffold-native.yaml']
-images:
-- 'us-central1-docker.pkg.dev/m2c-demo/container/promo-evaluator'
