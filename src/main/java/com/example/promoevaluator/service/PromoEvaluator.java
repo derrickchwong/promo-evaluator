@@ -1,8 +1,10 @@
 package com.example.promoevaluator.service;
 
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
-import com.example.promoevaluator.model.Campaign;
 import com.example.promoevaluator.model.Customer;
 import com.example.promoevaluator.model.Order;
 import com.example.promoevaluator.model.OrderItem;
@@ -36,7 +38,7 @@ public class PromoEvaluator {
         Customer customer = customerRepository.findById(order.getCustomerId()).get();
         customer.cancelOrder(order);
 
-        order.getOrderItems().parallelStream().forEach(item -> {
+        order.getOrderItems().values().parallelStream().forEach(item -> {
             Product product = productRepository.findById(item.getProductId()).get();
             ProductGroup productGroup = productGroupRepository.findById(product.getProductGroupId()).get();
 
@@ -60,14 +62,15 @@ public class PromoEvaluator {
         Order order = Order.builder()
             .id(orderCreatedEvent.getOrderId())
             .customerId(orderCreatedEvent.getCustomerId())
-            .orderItems(orderCreatedEvent.getOrderItems())
-            .build();
+            .orderItems(
+                orderCreatedEvent.getOrderItems().stream().collect(Collectors.toMap(OrderItem::getProductId, Function.identity()))
+            ).build();
         
         orderRepository.save(order);
         Customer customer = customerRepository.findById(order.getCustomerId()).get();
         customer.addOrder(order);
 
-        order.getOrderItems().parallelStream().forEach(item -> {
+        order.getOrderItems().values().parallelStream().forEach(item -> {
             Product product = productRepository.findById(item.getProductId()).get();
             ProductGroup productGroup = productGroupRepository.findById(product.getProductGroupId()).get();
 
@@ -94,8 +97,7 @@ public class PromoEvaluator {
         log.info("OrderItemQuantityUpdated received: {}", orderItemQuantityUpdatedEvent);
     
         Order order = orderRepository.findById(orderItemQuantityUpdatedEvent.getOrderId()).get();
-        OrderItem orderItem = order.getOrderItems()
-            .parallelStream().filter(item -> item.getProductId().equals(orderItemQuantityUpdatedEvent.getProductId())).findFirst().get();
+        OrderItem orderItem = order.getOrderItems().get(orderItemQuantityUpdatedEvent.getProductId());
         
         Customer customer = customerRepository.findById(order.getCustomerId()).get();
     

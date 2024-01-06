@@ -1,7 +1,7 @@
 package com.example.promoevaluator.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,13 +20,13 @@ public class Order {
     @Id
     private String id;
     private String customerId;
-    private List<OrderItem> orderItems;
+    private Map<String, OrderItem> orderItems;
 
     public void addOrderItem(OrderItem orderItem){
         
         if(orderItems == null)
-            orderItems = new ArrayList<>();
-        orderItems.add(orderItem);
+            orderItems = new HashMap<>();
+        orderItems.put(orderItem.getProductId(), orderItem);
     }
 
     @Override
