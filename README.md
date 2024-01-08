@@ -30,7 +30,7 @@ gcloud iam service-accounts keys create key.json --iam-account promo-evaluator-s
 Create K8s secret object
 
 ```
-kubectl create secret generic promo-evaluator-sa-key --from-file=key.json
+kubectl create secret generic service-key --from-file=key.json
 ```
 
 Create pubsub topic
