@@ -1,7 +1,7 @@
 {
   "type": "ORDER_CREATED",
-  "eventId": "event11001",
-  "orderId": "order11001",
+  "eventId": "event11002",
+  "orderId": "order11002",
   "customerId": "fc792ff3-3723-49f4-b241-987cd6fe5bbb",
   "orderItems": [
     {

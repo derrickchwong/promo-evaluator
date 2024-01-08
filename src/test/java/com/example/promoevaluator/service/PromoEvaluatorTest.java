@@ -72,7 +72,11 @@ public class PromoEvaluatorTest {
 
 
         // Create an order item
-        OrderItem item1 = OrderItem.builder().productId(p1.getId()).price(10).build();
+        // OrderItem item1 = OrderItem.builder().productId(p1.getId()).price(10).build();
+        OrderItem item1 = new OrderItem();
+        item1.setProductId(p1.getId());
+        item1.setPrice(10);
+        
 
         // Add the order item to the order
         order.addOrderItem(item1);
@@ -123,7 +127,11 @@ public class PromoEvaluatorTest {
 
 
         // Create an order item
-        OrderItem item1 = OrderItem.builder().productId(p1.getId()).price(10).build();
+        // OrderItem item1 = OrderItem.builder().productId(p1.getId()).price(10).build();
+        OrderItem item1 = new OrderItem();
+        item1.setProductId(p1.getId());
+        item1.setPrice(10);
+        
         
         // Add the order item to the order
         order.addOrderItem(item1);
@@ -187,13 +195,21 @@ public class PromoEvaluatorTest {
 
         merchant2.addCampaign(campaign2);
         // Create an order item
-        OrderItem item1 = OrderItem.builder().productId(p1.getId()).price(10).build();
+        // OrderItem item1 = OrderItem.builder().productId(p1.getId()).price(10).build();
+        OrderItem item1 = new OrderItem();
+        item1.setProductId(p1.getId());
+        item1.setPrice(10);
+        
         
         // Add the order item to the order
         order.addOrderItem(item1);
 
         // Create an order item
-        OrderItem item2 = OrderItem.builder().productId(p2.getId()).price(20).build();
+        // OrderItem item2 = OrderItem.builder().productId(p2.getId()).price(20).build();
+        OrderItem item2 = new OrderItem();
+        item2.setProductId(p2.getId());
+        item2.setPrice(20);
+        
         
         // Add the order item to the order
         order.addOrderItem(item2);
@@ -243,7 +259,11 @@ public class PromoEvaluatorTest {
         pg1.setProducts(List.of(p1));
 
         // Create an order item
-        OrderItem item1 = OrderItem.builder().productId(p1.getId()).price(10).build();
+        // OrderItem item1 = OrderItem.builder().productId(p1.getId()).price(10).build();
+        OrderItem item1 = new OrderItem();
+        item1.setProductId(p1.getId());
+        item1.setPrice(10);
+        
 
         // Add the order item to the order
         order.addOrderItem(item1);
@@ -277,7 +297,11 @@ public class PromoEvaluatorTest {
            .build();
 
        // Create an order item.
-       OrderItem orderItem = OrderItem.builder().productId("p1").price(10).quantity(2).build();
+    //    OrderItem orderItem = OrderItem.builder().productId("p1").price(10).quantity(2).build();
+       OrderItem orderItem = new OrderItem();
+        orderItem.setProductId("p1");
+        orderItem.setPrice(10);
+        orderItem.setQuantity(2);
        
        order.addOrderItem(orderItem);
 
@@ -336,7 +360,12 @@ public class PromoEvaluatorTest {
             .build();
 
         // Create an order item.
-        OrderItem orderItem = OrderItem.builder().productId("p1").price(10).quantity(2).build();
+        // OrderItem orderItem = OrderItem.builder().productId("p1").price(10).quantity(2).build();
+        OrderItem orderItem = new OrderItem();
+        orderItem.setProductId("p1");
+        orderItem.setPrice(10);
+        orderItem.setQuantity(2);
+        
         
         order.addOrderItem(orderItem);
 
