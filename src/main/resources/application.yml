@@ -1,7 +1,7 @@
-spring:
-  cloud:  
-    gcp:
-      project-id: m2c-demo
-      pubsub:
-        credentials: 
-          location: file:/service-key/promo-evaluator.json
+# spring:
+#   cloud:  
+#     gcp:
+#       project-id: m2c-demo
+#       pubsub:
+#         credentials: 
+#           location: file:/service-key/promo-evaluator.json

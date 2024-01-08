@@ -1,12 +1,12 @@
 {
   "type": "ORDER_CREATED",
-  "eventId": "event007",
-  "orderId": "order007",
-  "customerId": "dc25ece0-1975-4e5d-af5b-38d2cb2e2d1c",
+  "eventId": "event11001",
+  "orderId": "order11001",
+  "customerId": "fc792ff3-3723-49f4-b241-987cd6fe5bbb",
   "orderItems": [
     {
       "quantity": 1,
-      "productId": "60dbbc2a-78da-4fde-ae3e-5e5c0fa3d8cd",
+      "productId": "f3ceaf25-10a1-4781-9c9d-656c92563396",
       "price": 100
     }
   ]

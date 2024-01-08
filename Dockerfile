@@ -1,4 +1,8 @@
+FROM ghcr.io/graalvm/graalvm-community:17 as build 
+WORKDIR /build
+COPY . . 
+RUN ./mvnw clean package -Pnative 
+
 FROM ubuntu:jammy
-EXPOSE 8080
-COPY target/promo-evaluator /app/promo-evaluator
+COPY --from=build /build/target/promo-evaluator /app/promo-evaluator
 CMD ["/app/promo-evaluator"]

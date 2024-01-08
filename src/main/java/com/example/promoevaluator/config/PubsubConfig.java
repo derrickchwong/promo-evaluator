@@ -19,15 +19,15 @@ import com.google.cloud.spring.pubsub.support.converter.PubSubMessageConverter;
 @Configuration
 public class PubsubConfig {
 
-    @Bean
-    public MessageChannel orderChannel() {
-        return new DirectChannel();
-    }
+    // @Bean
+    // public MessageChannel orderChannel() {
+    //     return new DirectChannel();
+    // }
 
-    @Bean
-    public MessageChannel errorChannel() {
-        return new DirectChannel();
-    }
+    // @Bean
+    // public MessageChannel errorChannel() {
+    //     return new DirectChannel();
+    // }
 
     @Bean
     @Primary
@@ -37,25 +37,25 @@ public class PubsubConfig {
       return mapper;
     }
     
-    @Bean
-    @Primary
-    public PubSubMessageConverter pubSubMessageConverter(ObjectMapper objectMapper) {
-       return new JacksonPubSubMessageConverter(objectMapper);
-    }
+    // @Bean
+    // @Primary
+    // public PubSubMessageConverter pubSubMessageConverter(ObjectMapper objectMapper) {
+    //    return new JacksonPubSubMessageConverter(objectMapper);
+    // }
 
-    @Bean
-    public PubSubInboundChannelAdapter messageChannelAdapter(PubSubMessageConverter pubSubMessageConverter, 
-            @Qualifier("orderChannel") MessageChannel inputChannel, 
-            @Qualifier("errorChannel") MessageChannel errorChannel, 
-            PubSubTemplate pubSubTemplate) {
+    // @Bean
+    // public PubSubInboundChannelAdapter messageChannelAdapter(PubSubMessageConverter pubSubMessageConverter, 
+    //         @Qualifier("orderChannel") MessageChannel inputChannel, 
+    //         @Qualifier("errorChannel") MessageChannel errorChannel, 
+    //         PubSubTemplate pubSubTemplate) {
 
-        pubSubTemplate.setMessageConverter(pubSubMessageConverter);
-        PubSubInboundChannelAdapter adapter = new PubSubInboundChannelAdapter(pubSubTemplate, "promo-evaluator");
-        adapter.setOutputChannel(inputChannel);
-        adapter.setPayloadType(OrderEvent.class);
-        adapter.setAckMode(AckMode.MANUAL);
-        adapter.setErrorChannel(errorChannel);
-        return adapter;
-    }
+    //     pubSubTemplate.setMessageConverter(pubSubMessageConverter);
+    //     PubSubInboundChannelAdapter adapter = new PubSubInboundChannelAdapter(pubSubTemplate, "promo-evaluator");
+    //     adapter.setOutputChannel(inputChannel);
+    //     adapter.setPayloadType(OrderEvent.class);
+    //     adapter.setAckMode(AckMode.MANUAL);
+    //     adapter.setErrorChannel(errorChannel);
+    //     return adapter;
+    // }
 
 }

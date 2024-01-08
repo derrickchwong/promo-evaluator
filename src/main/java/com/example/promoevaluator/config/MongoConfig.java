@@ -23,7 +23,7 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
  
     @Override
     public MongoClient mongoClient() {
-        ConnectionString connectionString = new ConnectionString("mongodb://promo-evaluator:password@momo-mongodb:27017/momo");
+        ConnectionString connectionString = new ConnectionString("mongodb://promo-evaluator:password@34.29.99.220:27017/momo");
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
             .applyConnectionString(connectionString)
             .build();

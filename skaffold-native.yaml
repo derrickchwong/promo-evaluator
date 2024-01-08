@@ -9,15 +9,11 @@ build:
     docker:
       dockerfile: Dockerfile
 
-# manifests:
-#   rawYaml:
-#     - k8s/deploy.yml
-
 manifests:
   rawYaml:
   - cloud-run/promo-evaluator.yml
-
+  
 deploy:
   cloudrun:
-    projectid: YOUR-GCP-PROJECT
-    region: GCP-REGION
+    projectid: m2c-demo
+    region: us-central1
