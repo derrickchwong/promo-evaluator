@@ -22,6 +22,15 @@ portForward:
   port: 80
 
 
+# manifests:
+#   rawYaml:
+#     - k8s/deploy.yml
+
 manifests:
   rawYaml:
-    - k8s/deploy.yml
+  - cloud-run/promo-evaluator.yml
+
+deploy:
+  cloudrun:
+    projectid: YOUR-GCP-PROJECT
+    region: GCP-REGION

@@ -38,16 +38,16 @@ public class MerchantController {
     private final CampaignRepository campaignRepository;
     private final MongoTemplate mongoTemplate;
 
-    @DeleteMapping("/")
-    public ResponseEntity deleteAll(){
-        mongoTemplate.dropCollection(Merchant.class);
-        mongoTemplate.dropCollection(ProductGroup.class);
-        mongoTemplate.dropCollection(Product.class);
-        mongoTemplate.dropCollection(Campaign.class);
-        mongoTemplate.dropCollection(Order.class);
-        mongoTemplate.dropCollection(Customer.class);
-        return ResponseEntity.ok().build();
-    }
+    // @DeleteMapping("/")
+    // public ResponseEntity deleteAll(){
+    //     mongoTemplate.dropCollection(Merchant.class);
+    //     mongoTemplate.dropCollection(ProductGroup.class);
+    //     mongoTemplate.dropCollection(Product.class);
+    //     mongoTemplate.dropCollection(Campaign.class);
+    //     mongoTemplate.dropCollection(Order.class);
+    //     mongoTemplate.dropCollection(Customer.class);
+    //     return ResponseEntity.ok().build();
+    // }
 
     @PostMapping("/merchants")
     public ResponseEntity<Merchant> addMerchant(@RequestBody Merchant merchant){
