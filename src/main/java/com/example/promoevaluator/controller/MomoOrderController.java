@@ -29,7 +29,7 @@ public class MomoOrderController {
         this.objectMapper = objectMapper;
     }
 
-    @PostMapping("/")
+    @PostMapping("/order")
     public ResponseEntity receiveMessage(@RequestBody Body body) {
 
         log.info("Received a message {}", body );
