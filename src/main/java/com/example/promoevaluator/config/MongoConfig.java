@@ -3,6 +3,7 @@ package com.example.promoevaluator.config;
 import java.util.Collection;
 import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
@@ -21,9 +22,12 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
         return "momo";
     }
  
+    @Value("${spring.data.mongodb.uri}") 
+    private String mongoDbConnectionString;
+
     @Override
     public MongoClient mongoClient() {
-        ConnectionString connectionString = new ConnectionString("mongodb://promo-evaluator:password@34.29.99.220:27017/momo");
+        ConnectionString connectionString = new ConnectionString(mongoDbConnectionString);
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
             .applyConnectionString(connectionString)
             .build();

@@ -7,3 +7,9 @@ spec:
     spec:
       containers:
       - image: us-central1-docker.pkg.dev/m2c-demo/container/promo-evaluator
+        env:
+        - name: SPRING_DATA_MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: mongodb-dev

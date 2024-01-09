@@ -14,6 +14,12 @@ Create pubsub topic
 gcloud pubsub topics create order
 ```
 
+Create secret for MongoDb connection string
+```
+gcloud secrets create mongodb-dev --replication-policy=automatic --data="mongodb://USERNAME:PASSWORD@MONGO_HOST:27017/momo"
+```
+
+
 ### Build and Deploy locally
 
 GraalVM Native Image is great for startup time and memory usage. However the image building time can take over 10 mins, which is not ideal during development.
