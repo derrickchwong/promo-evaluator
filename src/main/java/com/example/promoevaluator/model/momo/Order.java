@@ -2,13 +2,14 @@ package com.example.promoevaluator.model.momo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Order {
     // {
     //     "DATAFLAG": "1",
@@ -29,21 +30,38 @@ public class Order {
     //     "RSALE_AMT": 1290,
     //     "QTY": 1
     // }
+    @JsonProperty("DATAFLAG")
     public String dataFlag;
+    @JsonProperty("CUST_NO")
     public String custNo;
+    @JsonProperty("ECM_PROMO_NO")
     public String ecmPromoNo;
+    @JsonProperty("START_DATE")
     public Date startDate;
+    @JsonProperty("END_DATE")
     public Date endDate;
+    @JsonProperty("M_PROMO_NO")
     public String mPromoNo;
+    @JsonProperty("REMOVE_FLAG")
     public String removeFlag;
+    @JsonProperty("ORDER_NO")
     public String orderNo;
+    @JsonProperty("FULL_ORDERNO")
     public String fullOrderno;
+    @JsonProperty("ORDER_DATE")
     public Date orderDate;
+    @JsonProperty("SET_YN")
     public String setYn;
+    @JsonProperty("GOODS_CODE")
     public String goodsCode;
+    @JsonProperty("GOODSDT_CODE")
     public String goodsdtCode;
+    @JsonProperty("GOODS_NAME")
     public String goodsName;
+    @JsonProperty("GOODSDT_INFO")
     public String goodsdtInfo;
+    @JsonProperty("RSALE_AMT")
     public Integer rsaleAmt;
+    @JsonProperty("QTY")
     public Integer qty;
 }

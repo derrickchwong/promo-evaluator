@@ -3,6 +3,13 @@ package com.example.promoevaluator.model.momo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class PromoDtInfo {
     //    {
     //         "M_PROMO_NO": "A23081800003",
@@ -49,46 +56,88 @@ public class PromoDtInfo {
     //         "SOURCE_ID": "MIDDLE"
     //     }
 
-    private String mPromoNo;
-    private String dtPromoNo;
-    private String dtPromoName;
-    private String actType;
-    private Date startDate;
-    private Date endDate;
-    private String week;
-    private String cntlimitYn;
-    private String cntlimitInterval;
-    private String cntlimit;
-    private String numlimitYn;
-    private String numlimitInterval;
-    private String numlimit;
-    private String awardlimitYn;
-    private String awardlimit;
-    private String exclusively;
-    private String userAgent;
-    private String ordYn;
-    private String ordInterval;
-    private String ordCntType;
-    private String ordNum;
-    private String ordAmt;
-    private String newCust;
-    private String firstBuy;
-    private String pointYn;
-    private String point;
-    private String payMeth;
-    private String cardFileNo;
-    private String insertId;
-    private String insertDate;
-    private String modifyId;
-    private String modifyDate;
-    private String cartType;
-    private String regStime;
-    private String regEtime;
-    private String orderType;
-    private String lotteryQuota;
-    private String regSdate;
-    private String regEdate;
-    private String giftVal;
-    private String repeatYn;
-    private String sourceId;
+    @JsonProperty("M_PROMO_NO")
+    public String mPromoNo;
+    @JsonProperty("DT_PROMO_NO")
+    public String dtPromoNo;
+    @JsonProperty("DT_PROMO_NAME")
+    public String dtPromoName;
+    @JsonProperty("ACT_TYPE")
+    public String actType;
+    @JsonProperty("START_DATE")
+    public Date startDate;
+    @JsonProperty("END_DATE")
+    public Date endDate;
+    @JsonProperty("WEEK")
+    public String week;
+    @JsonProperty("CNTLIMIT_YN")
+    public String cntlimitYn;
+    @JsonProperty("CNTLIMIT_INTERVAL")
+    public String cntlimitInterval;
+    @JsonProperty("CNTLIMIT")
+    public String cntlimit;
+    @JsonProperty("NUMLIMIT_YN")
+    public String numlimitYn;
+    @JsonProperty("NUMLIMIT_INTERVAL")
+    public String numlimitInterval;
+    @JsonProperty("NUMLIMIT")
+    public String numlimit;
+    @JsonProperty("AWARDLIMIT_YN")
+    public String awardlimitYn;
+    @JsonProperty("AWARDLIMIT")
+    public String awardlimit;
+    @JsonProperty("EXCLUSIVELY")
+    public String exclusively;
+    @JsonProperty("USER_AGENT")
+    public String userAgent;
+    @JsonProperty("ORD_YN")
+    public String ordYn;
+    @JsonProperty("ORD_INTERVAL")
+    public String ordInterval;
+    @JsonProperty("ORD_CNT_TYPE")
+    public String ordCntType;
+    @JsonProperty("ORD_NUM")
+    public String ordNum;
+    @JsonProperty("ORD_AMT")
+    public String ordAmt;
+    @JsonProperty("NEW_CUST")
+    public String newCust;
+    @JsonProperty("FIRST_BUY")
+    public String firstBuy;
+    @JsonProperty("POINT_YN")
+    public String pointYn;
+    @JsonProperty("POINT")
+    public String point;
+    @JsonProperty("PAY_METH")
+    public String payMeth;
+    @JsonProperty("CARD_FILE_NO")
+    public String cardFileNo;
+    @JsonProperty("INSERT_ID")
+    public String insertId;
+    @JsonProperty("INSERT_DATE")
+    public String insertDate;
+    @JsonProperty("MODIFY_ID")
+    public String modifyId;
+    @JsonProperty("MODIFY_DATE")
+    public String modifyDate;
+    @JsonProperty("CART_TYPE")
+    public String cartType;
+    @JsonProperty("REG_STIME")
+    public String regStime;
+    @JsonProperty("REG_ETIME")
+    public String regEtime;
+    @JsonProperty("ORDER_TYPE")
+    public String orderType;
+    @JsonProperty("LOTTERY_QUOTA")
+    public String lotteryQuota;
+    @JsonProperty("REG_SDATE")
+    public String regSdate;
+    @JsonProperty("REG_EDATE")
+    public String regEdate;
+    @JsonProperty("GIFT_VAL")
+    public String giftVal;
+    @JsonProperty("REPEAT_YN")
+    public String repeatYn;
+    @JsonProperty("SOURCE_ID")
+    public String sourceId;
 }

@@ -2,6 +2,13 @@ package com.example.promoevaluator.model.momo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class PromoMechGiftInfo {
     // {
         //             "M_PROMO_NO": "A23081800003",
@@ -17,17 +24,29 @@ public class PromoMechGiftInfo {
         //             "AWARD_DATE": null,
         //             "LOTTERY_DATE": "2023/09/02"
         //         }
-    private String mPromoNo;
-    private String dtPromoNo;
-    private String giftCode;
-    private String giftName;
-    private String giftType;
-    private String giftVal;
-    private String lotteryProc;
-    private String gift;
-    private int giftNum;
-    private Date idxDate;
-    private String awardDate;
-    private Date lotteryDate;
+        @JsonProperty("M_PROMO_NO")
+        public String mPromoNo;
+        @JsonProperty("DT_PROMO_NO")
+        public String dtPromoNo;
+        @JsonProperty("GIFT_CODE")
+        public String giftCode;
+        @JsonProperty("GIFT_NAME")
+        public String giftName;
+        @JsonProperty("GIFT_TYPE")
+        public String giftType;
+        @JsonProperty("GIFT_VAL")
+        public String giftVal;
+        @JsonProperty("LOTTERY_PROC")
+        public String lotteryProc;
+        @JsonProperty("GIFT")
+        public String gift;
+        @JsonProperty("GIFT_NUM")
+        public int giftNum;
+        @JsonProperty("IDX_DATE")
+        public Date idxDate;
+        @JsonProperty("AWARD_DATE")
+        public String awardDate;
+        @JsonProperty("LOTTERY_DATE")
+        public Date lotteryDate;
 
 }

@@ -1,5 +1,12 @@
 package com.example.promoevaluator.model.momo;
 
+import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
 public class Threshold {
     // {
     //     "giftGood": "7470656",
@@ -111,7 +118,7 @@ public class Threshold {
     private String giftType;
     private boolean isRealityGiftGoods;
     private String hasRegTime;
-    private PromoMechGiftInfo[] promoMechGiftInfo;
+    private List<PromoMechGiftInfo> promoMechGiftInfo;
     private PromoDtInfo promoDtInfo;
     private String regSdate;
     private String regEdate;

@@ -1,14 +1,13 @@
 package com.example.promoevaluator.model.momo;
 
 import java.util.Date;
+import java.util.List;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Campaign {
 
     //         {
@@ -126,6 +125,6 @@ public class Campaign {
     private boolean mShowOrd;
     private boolean mShowGiftOrd;
     private String mOrdItvTxt;
-    private Threshold[] thresholds;
+    private List<Threshold> thresholds;
 
 }
