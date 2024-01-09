@@ -29,7 +29,6 @@ public class Order {
     //     "RSALE_AMT": 1290,
     //     "QTY": 1
     // }
-
     public String dataFlag;
     public String custNo;
     public String ecmPromoNo;
