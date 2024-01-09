@@ -1,4 +1,4 @@
-package com.example.promoevaluator.model.momo;
+package com.example.promoevaluator.model;
 
 import java.util.Date;
 import java.util.List;

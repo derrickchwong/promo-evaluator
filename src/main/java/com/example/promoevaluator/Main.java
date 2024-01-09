@@ -4,13 +4,11 @@ import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.promoevaluator.model.demo.event.OrderCancelled;
-import com.example.promoevaluator.model.demo.event.OrderCreated;
-import com.example.promoevaluator.model.demo.event.OrderEvent;
-import com.example.promoevaluator.model.demo.event.OrderItemQuantityUpdated;
+import com.example.promoevaluator.model.Campaign;
+import com.example.promoevaluator.model.Order;
 
 @SpringBootApplication
-@RegisterReflectionForBinding({OrderEvent.class, OrderCreated.class, OrderCancelled.class, OrderItemQuantityUpdated.class})
+@RegisterReflectionForBinding({Order.class, Campaign.class})
 public class Main {
 
 	public static void main(String[] args) {

@@ -2,7 +2,7 @@ package com.example.promoevaluator.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.promoevaluator.model.momo.Order;
+import com.example.promoevaluator.model.Order;
 
 // Team 2
 @Service

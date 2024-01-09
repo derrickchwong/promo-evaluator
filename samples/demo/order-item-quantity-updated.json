@@ -1,8 +1,0 @@
-{
-    "type": "ORDER_ITEM_QUANTITY_UPDATED",
-    "orderId": "order006",
-    "productId": "product001",
-    "newQuantity": 2,
-    "previousQuantity": 1
-}
-  
