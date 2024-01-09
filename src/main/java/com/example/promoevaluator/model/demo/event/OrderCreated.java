@@ -1,9 +1,9 @@
-package com.example.promoevaluator.model.event;
+package com.example.promoevaluator.model.demo.event;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.promoevaluator.model.OrderItem;
+import com.example.promoevaluator.model.demo.OrderItem;
 
 import lombok.Data;
 

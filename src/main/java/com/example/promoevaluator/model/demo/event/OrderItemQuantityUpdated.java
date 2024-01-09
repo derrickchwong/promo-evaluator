@@ -1,4 +1,4 @@
-package com.example.promoevaluator.model.event;
+package com.example.promoevaluator.model.demo.event;
 
 import lombok.Data;
 

@@ -1,8 +1,8 @@
-package com.example.promoevaluator.repo;
+package com.example.promoevaluator.repo.demo;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.example.promoevaluator.model.ProductGroup;
+import com.example.promoevaluator.model.demo.ProductGroup;
 
 public interface ProductGroupRepository extends MongoRepository<ProductGroup, String> {
     

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.MessageChannel;
 
-import com.example.promoevaluator.model.event.OrderEvent;
+import com.example.promoevaluator.model.demo.event.OrderEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.cloud.spring.pubsub.core.PubSubTemplate;

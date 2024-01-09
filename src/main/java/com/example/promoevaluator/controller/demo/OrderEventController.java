@@ -1,4 +1,4 @@
-package com.example.promoevaluator.controller;
+package com.example.promoevaluator.controller.demo;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -6,12 +6,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.promoevaluator.model.Customer;
-import com.example.promoevaluator.model.event.OrderCancelled;
-import com.example.promoevaluator.model.event.OrderCreated;
-import com.example.promoevaluator.model.event.OrderEvent;
-import com.example.promoevaluator.model.event.OrderItemQuantityUpdated;
-import com.example.promoevaluator.service.PromoEvaluator;
+import com.example.promoevaluator.controller.Body;
+import com.example.promoevaluator.controller.Body.Message;
+import com.example.promoevaluator.model.demo.Customer;
+import com.example.promoevaluator.model.demo.event.OrderCancelled;
+import com.example.promoevaluator.model.demo.event.OrderCreated;
+import com.example.promoevaluator.model.demo.event.OrderEvent;
+import com.example.promoevaluator.model.demo.event.OrderItemQuantityUpdated;
+import com.example.promoevaluator.service.demo.PromoEvaluator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

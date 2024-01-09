@@ -1,14 +1,14 @@
-package com.example.promoevaluator.service;
+package com.example.promoevaluator.service.demo;
 
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 
-import com.example.promoevaluator.model.Customer;
-import com.example.promoevaluator.model.event.OrderCancelled;
-import com.example.promoevaluator.model.event.OrderCreated;
-import com.example.promoevaluator.model.event.OrderEvent;
-import com.example.promoevaluator.model.event.OrderItemQuantityUpdated;
+import com.example.promoevaluator.model.demo.Customer;
+import com.example.promoevaluator.model.demo.event.OrderCancelled;
+import com.example.promoevaluator.model.demo.event.OrderCreated;
+import com.example.promoevaluator.model.demo.event.OrderEvent;
+import com.example.promoevaluator.model.demo.event.OrderItemQuantityUpdated;
 import com.google.cloud.spring.pubsub.support.BasicAcknowledgeablePubsubMessage;
 import com.google.cloud.spring.pubsub.support.GcpPubSubHeaders;
 

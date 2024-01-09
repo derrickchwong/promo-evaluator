@@ -1,4 +1,4 @@
-package com.example.promoevaluator.model;
+package com.example.promoevaluator.model.demo;
 
 import java.util.HashMap;
 import java.util.Map;

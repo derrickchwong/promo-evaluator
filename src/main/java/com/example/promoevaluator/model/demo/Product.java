@@ -1,4 +1,4 @@
-package com.example.promoevaluator.model;
+package com.example.promoevaluator.model.demo;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 

@@ -1,4 +1,4 @@
-package com.example.promoevaluator.controller;
+package com.example.promoevaluator.controller.demo;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.promoevaluator.model.Campaign;
-import com.example.promoevaluator.model.Customer;
-import com.example.promoevaluator.model.Merchant;
-import com.example.promoevaluator.model.Order;
-import com.example.promoevaluator.model.Product;
-import com.example.promoevaluator.model.ProductGroup;
-import com.example.promoevaluator.repo.CampaignRepository;
-import com.example.promoevaluator.repo.MerchantRepository;
-import com.example.promoevaluator.repo.ProductGroupRepository;
-import com.example.promoevaluator.repo.ProductRepository;
+import com.example.promoevaluator.model.demo.Campaign;
+import com.example.promoevaluator.model.demo.Customer;
+import com.example.promoevaluator.model.demo.Merchant;
+import com.example.promoevaluator.model.demo.Order;
+import com.example.promoevaluator.model.demo.Product;
+import com.example.promoevaluator.model.demo.ProductGroup;
+import com.example.promoevaluator.repo.demo.CampaignRepository;
+import com.example.promoevaluator.repo.demo.MerchantRepository;
+import com.example.promoevaluator.repo.demo.ProductGroupRepository;
+import com.example.promoevaluator.repo.demo.ProductRepository;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

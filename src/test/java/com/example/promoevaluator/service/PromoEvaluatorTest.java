@@ -1,18 +1,20 @@
 package com.example.promoevaluator.service;
 
-import com.example.promoevaluator.model.Campaign;
-import com.example.promoevaluator.model.Customer;
-import com.example.promoevaluator.model.Merchant;
-import com.example.promoevaluator.model.Order;
-import com.example.promoevaluator.model.OrderItem;
-import com.example.promoevaluator.model.Product;
-import com.example.promoevaluator.model.ProductGroup;
-import com.example.promoevaluator.model.event.OrderCreated;
-import com.example.promoevaluator.model.event.OrderItemQuantityUpdated;
-import com.example.promoevaluator.repo.CustomerRepository;
-import com.example.promoevaluator.repo.OrderRepository;
-import com.example.promoevaluator.repo.ProductGroupRepository;
-import com.example.promoevaluator.repo.ProductRepository;
+import com.example.promoevaluator.model.demo.Campaign;
+import com.example.promoevaluator.model.demo.Customer;
+import com.example.promoevaluator.model.demo.Merchant;
+import com.example.promoevaluator.model.demo.Order;
+import com.example.promoevaluator.model.demo.OrderItem;
+import com.example.promoevaluator.model.demo.Product;
+import com.example.promoevaluator.model.demo.ProductGroup;
+import com.example.promoevaluator.model.demo.event.OrderCreated;
+import com.example.promoevaluator.model.demo.event.OrderItemQuantityUpdated;
+import com.example.promoevaluator.repo.demo.CustomerRepository;
+import com.example.promoevaluator.repo.demo.OrderRepository;
+import com.example.promoevaluator.repo.demo.ProductGroupRepository;
+import com.example.promoevaluator.repo.demo.ProductRepository;
+import com.example.promoevaluator.service.demo.PromoEvaluator;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

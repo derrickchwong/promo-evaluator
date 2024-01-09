@@ -1,4 +1,4 @@
-package com.example.promoevaluator.model;
+package com.example.promoevaluator.model.demo;
 
 import java.util.ArrayList;
 import java.util.List;

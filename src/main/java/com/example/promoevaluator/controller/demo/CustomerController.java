@@ -1,4 +1,4 @@
-package com.example.promoevaluator.controller;
+package com.example.promoevaluator.controller.demo;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.promoevaluator.model.Customer;
-import com.example.promoevaluator.repo.CustomerRepository;
-import com.example.promoevaluator.service.PromoEvaluator;
+import com.example.promoevaluator.model.demo.Customer;
+import com.example.promoevaluator.repo.demo.CustomerRepository;
+import com.example.promoevaluator.service.demo.PromoEvaluator;
 
 import lombok.AllArgsConstructor;
 
