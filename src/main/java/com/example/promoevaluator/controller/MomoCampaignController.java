@@ -1,8 +1,5 @@
 package com.example.promoevaluator.controller;
 
-import java.util.Base64;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,9 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.promoevaluator.model.Campaign;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.example.promoevaluator.service.PubsubMessageDecoder;
+import com.example.promoevaluator.service.PubsubMessageDecoder.UnableToDecodeException;
 import lombok.extern.slf4j.Slf4j;
 
 // Team 1
@@ -20,10 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 public class MomoCampaignController {
     
-    private ObjectMapper objectMapper;
+    private PubsubMessageDecoder pubsubMessageDecoder;
 
-    public MomoCampaignController(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
+    public MomoCampaignController(PubsubMessageDecoder pubsubMessageDecoder) {
+        this.pubsubMessageDecoder = pubsubMessageDecoder;
     }
 
     @PostMapping("/campaign")
@@ -39,25 +35,12 @@ public class MomoCampaignController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        String data = message.getData();
-        log.info("data: {}",data);
-        Campaign campaign = null;
-        if(StringUtils.isNoneEmpty(data)){
-            String decodedData = new String(Base64.getDecoder().decode(data));
-            log.info("decodedData: {}",decodedData);
-            // use object mapper to convert decodedData to OrderEvent
-            
-            try {
-                campaign = objectMapper.readValue(decodedData, Campaign.class);
-
-                // process the campaign
-                
-            } catch (JsonProcessingException e) {
-                log.error(e.getMessage(), e);
-                // return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
+        try {
+            Campaign campaign = pubsubMessageDecoder.decode(body, Campaign.class);
+        } catch (UnableToDecodeException e) {
+            log.error(e.getMessage(), e);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        
 
         return ResponseEntity.ok().build();
     }

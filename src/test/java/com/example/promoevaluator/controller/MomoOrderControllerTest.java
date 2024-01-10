@@ -1,6 +1,7 @@
 package com.example.promoevaluator.controller;
 
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -10,6 +11,7 @@ import java.util.Base64;
 import com.example.promoevaluator.controller.Body.Message;
 import com.example.promoevaluator.model.Order;
 import com.example.promoevaluator.service.MomoPromoCalculator;
+import com.example.promoevaluator.service.PubsubMessageDecoder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class MomoOrderControllerTest {
 
     @MockBean
     private MomoPromoCalculator momoPromoCalculator;
+
+    @MockBean
+    private PubsubMessageDecoder pubsubMessageDecoder;
 
     @Test
     public void testReceiveMessage() throws Exception {
@@ -84,6 +89,9 @@ public class MomoOrderControllerTest {
         body.setMessage(message);
         
         String bodyJson = objectMapper.writeValueAsString(body);
+
+        when(pubsubMessageDecoder.decode(body, Order.class))
+            .thenReturn(order);
 
         // Create a mock request.
         mockMvc.perform(post("/order")

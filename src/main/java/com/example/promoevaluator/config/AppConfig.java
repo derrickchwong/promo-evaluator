@@ -3,6 +3,8 @@ package com.example.promoevaluator.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+
+import com.example.promoevaluator.service.PubsubMessageDecoder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
@@ -18,5 +20,9 @@ public class AppConfig {
       return mapper;
     }
     
-
+    @Bean
+    public PubsubMessageDecoder pubsubMessageDecoder(ObjectMapper objectMapper) {
+      return new PubsubMessageDecoder(objectMapper);
+    }
+    
 }

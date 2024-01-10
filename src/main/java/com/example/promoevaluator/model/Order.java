@@ -2,9 +2,9 @@ package com.example.promoevaluator.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -37,8 +37,10 @@ public class Order {
     @JsonProperty("ECM_PROMO_NO")
     public String ecmPromoNo;
     @JsonProperty("START_DATE")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     public Date startDate;
     @JsonProperty("END_DATE")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     public Date endDate;
     @JsonProperty("M_PROMO_NO")
     public String mPromoNo;
@@ -49,6 +51,7 @@ public class Order {
     @JsonProperty("FULL_ORDERNO")
     public String fullOrderno;
     @JsonProperty("ORDER_DATE")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     public Date orderDate;
     @JsonProperty("SET_YN")
     public String setYn;
