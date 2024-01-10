@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.TimeZone;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -58,6 +59,7 @@ public class PubsubMessageDecoderTest {
         
         Order expected = new Order();
         SimpleDateFormat sdf = new SimpleDateFormat( "yyyy/MM/dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("HKT"));
         expected.setDataFlag("1");
         expected.setCustNo("201902501293");
         expected.setEcmPromoNo("20240105142141577");
