@@ -1,0 +1,11 @@
+logging.level:
+  org:
+    springframework:
+      data:
+        mongodb: DEBUG
+      databoot.autoconfigure.mongo.embedded: INFO
+    mongodb: INFO
+  de.flapdoodle.embed.mongo: off
+
+de.flapdoodle.mongodb.embedded.version: 5.0.5
+# spring.data.mongodb.database: test
