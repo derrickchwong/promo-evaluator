@@ -3,6 +3,9 @@ package com.example.promoevaluator.repo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,6 +61,33 @@ public class PromoOrderRepositoryTest {
         List<PromoOrder> pos2 = promoOrderRepository.findAllByEcmPromoNo("ecm00001");
         assertEquals(1, pos2.size());
         assertEquals(promoOrder, pos2.get(0));
+        
+    }
+
+    @Test
+    public void whenOrderDateBetweenStartAndEndDate_thenReturnsOrders() throws ParseException {
+        // Create a PromoOrder
+        PromoOrder promoOrder = new PromoOrder();
+        promoOrder.setId(new PromoOrderId("pid0001", "cid0001"));
+        
+        // Create an Order
+        Order order = new Order();
+        order.setEcmPromoNo("ecm00001");
+        order.setCustNo("cid0001");
+        order.setDataFlag("1");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        order.setOrderDate(sdf.parse("2022-01-05"));
+        
+        promoOrder.setOrders(List.of(order));
+        
+        promoOrderRepository.save(promoOrder);
+
+        List<PromoOrder> promoOrders = promoOrderRepository.findAll();
+        assertEquals(1, promoOrders.size());
+        assertEquals(promoOrder, promoOrders.get(0));
+
+        var pos = promoOrderRepository.findByOrderBetweenDate(sdf.parse("2022-01-01"), sdf.parse("2022-01-10"));
+        assertEquals(1, pos.size());
         
     }
 }

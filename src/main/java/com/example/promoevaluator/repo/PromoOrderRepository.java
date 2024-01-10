@@ -1,5 +1,6 @@
 package com.example.promoevaluator.repo;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -15,4 +16,7 @@ public interface PromoOrderRepository extends MongoRepository<PromoOrder, PromoO
 
     @Query("{ 'orders.dataFlag' : ?0 }")
     List<PromoOrder> findAllByDataflag(String dataflag);
+
+    @Query("{ 'orders.orderDate' : { $gte: ?0, $lte: ?1 } }")
+    List<PromoOrder> findByOrderBetweenDate(Date startDate, Date endDate);
 }
